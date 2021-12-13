@@ -265,6 +265,16 @@
 
     @endif
 </div>
+<div class="container"> 
+
+    <div class="row mb-5 showmsgdiv">
+        <div class="col-sm-12 col-md-9 col-12 p-0"> 
+                <label> All items has been deleted from your cart..! Please continue to &nbsp;  </label><a href="{{ url('/') }}">Shop</a>
+        </div>
+    </div>
+    </div>
+<div class="container"> 
+
 <div class="row offer-section my-2 py-3">
     <div class="col-12"> <h4>Available Offers</h4> </div>
     <div class="col-sm-4 col-md-4 col-12 my-2  ">
@@ -328,11 +338,8 @@
     </div>
     
 </div>
-    <div class="row mb-5 showmsgdiv">
-        <div class="col-sm-12 col-md-9 col-12 p-0"> 
-                <label>Please Shop to continue</label><a href="{{ url('/') }}">Shop</a>
-        </div>
-    </div>
+</div>
+
    
 
 <script type="text/javascript">
