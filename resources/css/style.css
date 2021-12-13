@@ -2802,6 +2802,7 @@ div#reloadid {
     transform: scale(.75);
     transition: all ease .35s;
     border-radius: 20px;
+    min-height: 175px;
 }
 
 .product-transition .woocommerce-loop-product__link {
@@ -2912,3 +2913,53 @@ i.fa.fa-shopping-cart {
 
 
 /* home content end */
+
+.offer-section {
+    border-top: 1px solid #ccc;
+}
+
+.offer-box {
+    border: solid 1px #eee;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #eee;
+    background: #f9f9f9ad;
+}
+
+.offer-title {
+    font-size: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.Offer-desc {
+    font-size: 12px;
+    line-height: 14px;
+    height: 42px;
+    overflow: hidden;
+}
+
+.offer-validate {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.offer-copy a {
+    width: 100%;
+    background-color: #ffe6e8;
+    border: 1px dashed #da3340;
+    border-radius: 5px;
+    padding: 10px;
+    display: inline-block;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.copy-code a {
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.copy-code.copied a {
+    color: green !important;
+}

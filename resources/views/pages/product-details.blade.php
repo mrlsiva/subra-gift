@@ -8,9 +8,9 @@
       <div class="row border-bottom-product">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{ url('/') }}">Home / </a> <a href="{{ url('/series/'.$series_image.'') }}">{{$series_name}} / </a> {{$book_title}}</li>
-                  {{-- <li class="breadcrumb-item" aria-current="page"></li> --}}
-                  {{-- <li class="breadcrumb-item active" aria-current="page"></li> --}}
+                  <li class="breadcrumb-item"><a href="{{ url('/') }}">Home  </a></li>
+                  <li class="breadcrumb-item" aria-current="page">  <a href="{{ url('/series/'.$series_image.'') }}">{{$series_name}}  </a> </li>
+                  <li class="breadcrumb-item active" aria-current="page">{{$book_title}}</li>
                </ol>
             </nav>
          </div>
