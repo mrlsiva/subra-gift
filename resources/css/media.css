@@ -38,10 +38,6 @@ None (auto)	         |  540px           |  720px           |  	960px         |  
     .second-navbar::after {
         min-height: 15px !important;
     }
-    .navbar-brand img {
-        /* width: 180px !important; */
-        /* margin-top: 10px !important; */
-    }
     .second-navbar button {
         line-height: 50px !important;
     }
@@ -83,15 +79,8 @@ None (auto)	         |  540px           |  720px           |  	960px         |  
     .price-book {
         margin-top: 0px !important;
     }
-    /* .top-static-nav li {
-        width: 50%;
-    } */
     .second-navbar::after {
         min-height: 20px !important;
-    }
-    .navbar-brand img {
-        /* width: 220px !important; */
-        /* margin-top: 10px !important; */
     }
     .second-navbar button {
         line-height: 70px !important;
@@ -219,9 +208,6 @@ None (auto)	         |  540px           |  720px           |  	960px         |  
     }
     .hide-mobile {
         display: none;
-    }
-    ul.navbar-nav.mr-auto {
-        /* display: none !important; */
     }
     .h3,
     h3 {

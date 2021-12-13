@@ -1028,10 +1028,6 @@ a.text-left:hover {
     color: #000;
 }
 
-.white-bg {
-    /* text-align: left; */
-}
-
 .hover-effect h6 {
     font-size: 0.8rem !important;
 }
@@ -1048,11 +1044,6 @@ a.text-left:hover {
 
     white-space: nowrap; */
     font-size: 0.9rem !important;
-}
-
-a.nav-link {
-    /* float: left; */
-    /* margin-right: 10px; */
 }
 
 .slide-nav-subra .nav-item {
@@ -1395,18 +1386,6 @@ a.nav-link {
     padding: 0;
     max-width: 200px;
     float: left;
-}
-
-.show_one_line {
-    /* display: -webkit-box;
-
-    -webkit-line-clamp: 1;
-
-    -webkit-box-orient: vertical;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis; */
 }
 
 .show_two_line {
