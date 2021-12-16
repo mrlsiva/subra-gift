@@ -437,6 +437,45 @@ class AdminController extends Controller
         }
     }
 
+    public function postImagesidetopCategory(Request $request)
+    {
+        $category_sidetop_id = $request->input('category_sidetop_id');
+        $simage = $request->input('simage');
+        $timage = $request->input('timage');
+        $selectedCategory = Categories::where('id', $category_sidetop_id)->first(); 
+        if($request->hasFile('simage')) {
+            $filename = time().'-'.$selectedCategory->series_table_name.'-'.'side'.'.'.$request->file('simage')->getClientOriginalExtension();
+				$despath = storage_path("app/public/uploads/img/sidetop-img");
+				$request->file('simage')->move($despath,$filename);
+        }
+        if($request->hasFile('timage'))
+        {
+            $tfilename = time().'-'.$selectedCategory->series_table_name.'-'.'top'.'.'.$request->file('simage')->getClientOriginalExtension();;
+				$tdespath = storage_path("app/public/uploads/img/sidetop-img");
+				$request->file('timage')->move($tdespath,$tfilename);
+                $cat_image = storage_path("app/public/uploads/img/".$selectedCategory->cat_side_img);
+                //$filePath = "/uploads/filename.ext"; 
+                /* if(file_exists($cat_image)){
+                  unlink($filePath);
+                } else {
+                  dd('File does not exists.');
+                } */
+        }
+        try{
+        DB::table('categories')->where('id',$category_sidetop_id)->update([
+            'cat_side_img'=>$filename,
+            'cat_top_img'=>$tfilename
+        ]);
+        $message = "Side and Top Image Uploaded Successfully";
+        Session::flash('sidetopimageAdded', $message); 
+        return redirect('admin/view-all-books');  
+    }
+    catch(\Exception $e){
+        dd($e);
+    }
+
+    }
+
     public function alluser(Request $request){
         $tables = array();
         $tables[] = DB::table('users')->get(); 
@@ -576,7 +615,44 @@ class AdminController extends Controller
     public function orderShipStatus(Request $request) {
         $ord = Order::find($request->order_id);
         $ord->ship_status = $request->status;
+        $to_name = $ord->first_name;
+        $to_email = $ord->email;
         if($ord->save())
+        //$to_name = 'Ligori';  order_shipstatus
+        // $to_email = 'sugunadevi14@gmail.com';
+        if($request->status == 5)
+        {
+            //$to_email = 'venkatecool6@gmail.com';
+
+           
+         $data = array('name'=>$to_name, 'body' => 'Your Transaction Id is ' .$ord->txn_id. ' 
+                        and your Transaction Detail is ' .$ord->txn_details.
+                        'and your total amount is ' .$ord->amount);
+            
+            try {
+                \Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)
+                    ->subject('Order canceled your money credited within 2 bank working days');
+                    // $message->from('sugunadvp@gmail.com','Test Mail');
+                    //$message->from('venkateshftn@gmail.com','Cancellation Order');
+                });
+            }
+            catch(Exception $ex) {
+                //$this->populate_array[] = array($row[2] => $ex->getLine());
+                echo $ex->getLine();
+                return "We've got errors!";
+            }
+            catch(\Swift_TransportException $e) {
+                echo $response = $e->getMessage();
+                return "222";
+            }
+            catch(\Illuminate\Database\QueryException $ex) {
+                //$this->populate_array[] = array($row[2] => $ex->getLine());
+                echo $ex->getLine();
+                return "333";
+            }
+        }
+
             return response()->json(['status' => 1]);
     }
 
@@ -589,7 +665,7 @@ class AdminController extends Controller
             ->join('categories as cat','c.category_id','cat.id')
             ->where('ord_id', $request->order_id) 
             ->get();
-               
+               //$order_shipstatus = $order;
             $orders = $getTable = [];$total=0;
             foreach ($getItems as $k=>$item) {
                 $cat_img = DB::table($item->series_table_name)->select('thumb_img')->where("sku",$item->sku)->first();
@@ -606,7 +682,7 @@ class AdminController extends Controller
                 $getTable[$k]["qty"] = $item->qty;
             }
             $orders = $getTable;
-
+            
             $html = view('includes/adminOrder',compact('order', 'orders'))->render();
             return response()->json(['status' => 1, 'html' => $html]);
         }

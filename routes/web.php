@@ -166,6 +166,9 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function()
     Route::get('/coupon-create','AdminController@getCouponCreate')->name('admin.coupon.create');  
     Route::post('/coupon-store','AdminController@postCouponStore')->name('admin.coupon.store');
     Route::any('/coupon-delete/{id}','AdminController@couponDelete');
+    Route::get('/coupon-edit/{id}','AdminController@getCouponEdit')->name('admin.coupon.edit');
+    Route::post('/coupon-update/{id}','AdminController@postCouponUpdate')->name('admin.coupon.update');
+
     Route::post('/book-deliver','AdminController@postBookDeliver')->name('admin.book.deliver');
 
     Route::get('/orders', 'AdminController@getOrdersList')->name('admin.order.list');

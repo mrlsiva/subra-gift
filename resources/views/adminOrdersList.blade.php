@@ -1,6 +1,54 @@
 @extends('layouts.appAdmin')
 
 @section('content')
+<style>
+  body {
+        background: #ececec;
+    }
+    /*Hidden class for adding and removing*/
+    .lds-dual-ring.hidden {
+        display: none;
+    }
+
+    /*Add an overlay to the entire page blocking any further presses to buttons or other elements.*/
+    .overlay {
+        position: fixed;
+        top: 180px;
+        left: 606px;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,.8);
+        z-index: 999;
+        opacity: 1;
+        transition: all 0.5s;
+    }
+    
+    /*Spinner Styles*/
+    .lds-dual-ring {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 5% auto;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+  </style>
 <div class="container-fliud">
     <div class=" justify-content-center">
         <div class="col-md-12">
@@ -48,6 +96,8 @@
                                   {{ trans('app.out_for_delivery') }}
                                   @elseif($ord->ship_status == 4)
                                   {{ trans('app.delivered') }}
+                                  @elseif($ord->ship_status == 5)
+                                  {{ trans('app.cancelled') }}
                                   @endif
                               </td>
                               <td> 
@@ -64,7 +114,7 @@
         </div>
     </div>
 </div>
-
+<div id="loader" class="lds-dual-ring hidden overlay"></div>
 @include('includes.adminOrderDetails')
 
 <div class="container">
@@ -141,11 +191,16 @@ $( "#ordDetModContent" ).delegate( ".mybutton", "click", function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
+    if(confirm('Shall I Proceed')){
     $.ajax({
         url:"{{url('admin/order-shipstatus')}}",
         type:"POST",
         data:{"order_id": order_id,"status":mystatus},
         dataType:'json',
+        beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+                //$('#loader').removeClass('hidden')
+                $(':input[type="button"]').prop('disabled', true);
+            },
         success:function(data)
         {
           if(data.status) {
@@ -157,13 +212,21 @@ $( "#ordDetModContent" ).delegate( ".mybutton", "click", function() {
             } else if(mystatus == 4) {
               alert("Order is delivered!");
             }
+            else if(mystatus == 5) {
+              alert("Order is Cancelled!");
+            }
             $('#order_id').val('');
             $('#ordDetModContent').html('');
             $("#commentmodal").modal('hide');
             location.reload();
           }
-        }
-    })
+        },
+        complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+               // $('#loader').addClass('hidden')
+                $(':input[type="button"]').prop('disabled', false);
+            },
+    });
+  }
 })
 </script>
 </div>

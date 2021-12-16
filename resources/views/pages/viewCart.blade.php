@@ -10,6 +10,13 @@
            </ol>
         </nav>
      </div>
+     @if(count($cartItems) == 0)
+
+       <div class="form-control">
+            <center>No Products In Cart</center>
+            <center> <img src="https://www.subragiftstudios.com/storage/app/public/cart/cart-empty.png" style="width:110px;height:110px;"></img></center>
+        </div>
+     @endif
     @if(count($cartItems) > 0)
     <div class="row mb-5 hidefulldiv">
         <div class="col-sm-12 col-md-9 col-12" id="reloadid">
@@ -267,6 +274,10 @@
     <div class="row mb-5 showmsgdiv">
         <div class="col-sm-12 col-md-9 col-12 p-0"> 
                 <label>Please Shop to continue</label><a href="{{ url('/') }}">Shop</a>
+        </div>
+        <div class="form-control">
+            <center>No Products In Cart</center>
+            <center> <img src="https://www.subragiftstudios.com/storage/app/public/cart/cart-empty.png" style="width:110px;height:110px;"></img></center>
         </div>
     </div>
    
