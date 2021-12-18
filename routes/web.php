@@ -150,6 +150,8 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function()
     Route::any('/delete-book/{id}/{category}','AdminController@deleteBook');
     Route::post('/add-trial-book',['as'=>'admin.insert.trial.book','uses'=>'AdminController@insertTrialBookToTable']);
     Route::get('/dashboard', 'AdminController@dashboard');
+    //admin.cat.sidetop
+    Route::post('/side-top-catimg',['as'=>'admin.cat.sidetop','uses'=>'AdminController@postImagesidetopCategory']);
     
     Route::get('/blog',['as'=>'admin.blog','uses'=>'AdminController@listBlog']);
     Route::get('/comments',['as'=>'admin.comments','uses'=>'AdminController@listComments']);
