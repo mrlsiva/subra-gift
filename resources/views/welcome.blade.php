@@ -162,8 +162,9 @@
          </a> 
          <span class="price">
          View more...</span>
-        </div></div>
         </div>
+      </div>
+    </div>
         
        <div class="col-md-3 mt-4">
         <div class="product-block">
@@ -327,7 +328,7 @@
                  <div class="product-transition">
                  {{-- <button class="woosw-btn woosw-btn-14" data-id="14"><i class="fa fa-heart"></i></button> --}}
                  <div class="product-image">
-                 <img src="storage/app/public/uploads/img/{{ $value->series_table_name }}/{{ $value->series_table_name }}.png"></div>
+                 <img src="	https://www.subragiftstudios.com/storage/app/public/uploads/img/{{ $value->series_table_name }}/{{ $value->series_table_name }}.png"></div>
                  <a href="series/{{ $value->series_table_name }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"></a></div>
                  <div class="product-caption">
                  <h3 class="woocommerce-loop-product__title">

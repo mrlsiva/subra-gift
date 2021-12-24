@@ -150,6 +150,8 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function()
     Route::any('/delete-book/{id}/{category}','AdminController@deleteBook');
     Route::post('/add-trial-book',['as'=>'admin.insert.trial.book','uses'=>'AdminController@insertTrialBookToTable']);
     Route::get('/dashboard', 'AdminController@dashboard');
+    //admin.cat.sidetop
+    Route::post('/side-top-catimg',['as'=>'admin.cat.sidetop','uses'=>'AdminController@postImagesidetopCategory']);
     
     Route::get('/blog',['as'=>'admin.blog','uses'=>'AdminController@listBlog']);
     Route::get('/comments',['as'=>'admin.comments','uses'=>'AdminController@listComments']);
@@ -166,6 +168,9 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function()
     Route::get('/coupon-create','AdminController@getCouponCreate')->name('admin.coupon.create');  
     Route::post('/coupon-store','AdminController@postCouponStore')->name('admin.coupon.store');
     Route::any('/coupon-delete/{id}','AdminController@couponDelete');
+    Route::get('/coupon-edit/{id}','AdminController@getCouponEdit')->name('admin.coupon.edit');
+    Route::post('/coupon-update/{id}','AdminController@postCouponUpdate')->name('admin.coupon.update');
+
     Route::post('/book-deliver','AdminController@postBookDeliver')->name('admin.book.deliver');
 
     Route::get('/orders', 'AdminController@getOrdersList')->name('admin.order.list');
@@ -174,6 +179,9 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function()
     Route::post('/order-shipstatus',['as'=>'admin.order.shipstatus','uses'=>'AdminController@orderShipStatus']);
 
     Route::get('/order-details', 'AdminController@getPopupOrderDetails')->name('admin.orderdetails');
+    Route::get('/dashboard-image', 'AdminController@getDashboardImage')->name('admin.dashboard.image');
+    Route::post('/dashboardpost-image', 'AdminController@postDashboardImage')->name('admin.dashboardpost.image');
+    Route::any('/delete-dashboardimage/{id}','AdminController@deleteDashboardImage');
 });
 
 Route::any('membership/plans', 'MembershipController@checkMembership');

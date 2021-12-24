@@ -3,13 +3,13 @@
 @section('content')
    <div class="container-fluid">
       <div class="row mb-2">
-         <div class="col-12 text-center prod_title" style="background-image: url(../storage/app/public/uploads/img/{{$series_image}}/offer/offer_hor.jpg);">
+         <div class="col-12 text-center prod_title" style="background-image: url(../storage/app/public/uploads/img/sidetop-img/{{$timage}});">
                <h2 class="mb-2 mt-2"> {{$series_name}} </h2>
          </div>
       </div>
       <div class="row e-series">
          <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 text-center hide-mobile">
-            <img src="{{ url('storage/app/public/uploads/img/'.$series_image.'/offer/offer_ver.jpg') }}" class="img-responsive" />
+            <img src="{{ url('storage/app/public/uploads/img/sidetop-img/'.$simage) }}" class="img-responsive" />
          </div>
          <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 text-center">
          <div class="row">

@@ -9,6 +9,45 @@
     @if(Session::has('itemDeleted'))
     <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{!! Session::pull('itemDeleted') !!} </p>
     @endif
+    @if(Session::has('sidetopimageAdded'))
+    <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{!! Session::pull('sidetopimageAdded') !!} </p>
+    @endif
+    <div class="col-md-12">
+        @if(isset($selectedCategory))
+            <div class="card">
+                <div class="card-header">Side and Top Image Category
+                @if(Session::has('booksByCategory') && !empty($selectedCategory))    
+                => {{$selectedCategory->series_name}}
+                @endif
+                </div>
+
+                <div class="card-body">
+                   
+                    <form action="{{route('admin.cat.sidetop')}}" method="POST" name="sidetop_cat" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group col-4">
+                            <label >Side Image</label>
+                            <input type="file" id="simage" name="simage" required>
+                            @if(isset($selectedCategory->cat_side_img))
+                            <img src="{{ url('storage/app/public/uploads/img/sidetop-img/'.$selectedCategory->cat_side_img) }}" class="img-responsive" />
+                            @endif
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="book_category">Top Image</label>
+                            <input type="file" id="timage" name="timage" required>
+                            @if(isset($selectedCategory->cat_top_img))
+                            <img src="{{ url('storage/app/public/uploads/img/sidetop-img/'.$selectedCategory->cat_top_img) }}" class="img-responsive" />
+                            @endif
+                        </div>
+                        @if(!empty($selectedCategory))
+                        <input type="hidden" id="category_sidetop_id" name="category_sidetop_id" value="{{$selectedCategory->id}}" />
+                        @endif
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            @endif
+     </div>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">View Products By Category
