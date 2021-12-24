@@ -700,7 +700,10 @@ class AdminController extends Controller
        
         $dashboard_image = $request->input('dashboard_image');
         $dashboard_link = $request->input('dashboard_link');
-
+        $dash_img_folder = storage_path("app/public/uploads/img/dashboardimage");
+        if(!file_exists($dash_img_folder)){
+            mkdir($dash_img_folder);
+        }
         if($request->file('dashboard_image'))
         {
             $filename = time().'.'.$request->file('dashboard_image')->getClientOriginalExtension();
