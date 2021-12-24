@@ -5,4 +5,5 @@ return [
     'packed' => 'Packed',
     'out_for_delivery' => 'Out for delivery',
     'delivered' => 'Delivered',
+    'cancelled' => 'Cancelled',
 ];

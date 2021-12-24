@@ -41,6 +41,7 @@
                                   <td> {{$ord->amount}} </td>
                                   <td> {{ date('d-m-Y H:i', strtotime($ord->created_at) ) }} </td>
                                   <td> 
+                                  
                                   @if($ord->ship_status == 1)
                                   {{ trans('app.order_placed') }}
                                   @elseif($ord->ship_status == 2)
@@ -49,6 +50,8 @@
                                   {{ trans('app.out_for_delivery') }}
                                   @elseif($ord->ship_status == 4)
                                   {{ trans('app.delivered') }}
+                                  @elseif($ord->ship_status == 5)
+                                  {{ trans('app.cancelled') }}
                                   @endif
                                   </td>
                                   <td> <a href="{{ route('order.details', $ord->id) }}" class="btn btn-primary">View</a></td>

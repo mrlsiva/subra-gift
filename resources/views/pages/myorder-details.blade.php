@@ -150,6 +150,7 @@
           </div>  -->
 
           <!-- Add class 'active' to progress -->
+          @if($order->ship_status != 5)
           <div class="row d-flex justify-content-center">
               <div class="col-12">
                   <ul id="progressbar" class="text-center">
@@ -182,6 +183,9 @@
                   </div>
               </div>
           </div>
+            @else
+            <div><center><b>Order Cancelled</b></center></div>
+            @endif
       </div>
     </div>
           

@@ -121,6 +121,18 @@
               </div>
             </div>
 
+            <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-2">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Dashboard</h5>
+                
+                  <div class="col-12 mb-4">
+                  <a href="{{ url('/admin/dashboard-image') }}" class="e-series-book mt-3 mb-3"> <span>Dashboard Images</span></a></div>
+                  
+                </div>
+              </div>
+            </div>
+
 
            
           </div>

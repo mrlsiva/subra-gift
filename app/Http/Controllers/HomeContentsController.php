@@ -20,6 +20,7 @@ class HomeContentsController extends Controller
     {
         
         $categories = Categories::all(); //find(1)
+        $dashboard_image = DB::table('dashboard_image')->get();
         if (Auth::user()){
             $offlineUser = DB::table('users')
                         ->where('id', Auth::user()->id)
@@ -40,12 +41,14 @@ class HomeContentsController extends Controller
             else{
                 return view('welcome')
                     ->with('categories', $categories)
+                    ->with('dashboard_image', $dashboard_image)
                     ->with('offlineUser', '');
             }
         }
         else{
             return view('welcome')
                 ->with('categories', $categories)
+                ->with('dashboard_image', $dashboard_image)
                 ->with('offlineUser', '');
         }
         
