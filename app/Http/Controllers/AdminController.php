@@ -360,7 +360,6 @@ class AdminController extends Controller
         Session::flash('message', $message); 
         return redirect('admin/blog');
     }
-    
     public function deletePost(Request $request){
         // dd($request->all(), "Test");
         $id = $request['delete_post'];
@@ -623,8 +622,6 @@ class AdminController extends Controller
         if($request->status == 5)
         {
             //$to_email = 'venkatecool6@gmail.com';
-
-           
          $data = array('name'=>$to_name, 'body' => 'Your Transaction Id is ' .$ord->txn_id. ' 
                         and your Transaction Detail is ' .$ord->txn_details.
                         'and your total amount is ' .$ord->amount);
@@ -686,5 +683,48 @@ class AdminController extends Controller
             $html = view('includes/adminOrder',compact('order', 'orders'))->render();
             return response()->json(['status' => 1, 'html' => $html]);
         }
+    }
+
+    public function getDashboardImage()
+    {
+      /*   $tables = array();
+        $tables[] = DB::table('users')->get(); 
+        return view('adminAlluser',compact('tables')); */
+        $getdashobardImage = DB::table('dashboard_image')->get();
+        return view('dashboardImage',compact('getdashobardImage'));
+
+    }
+
+    public function postDashboardImage(Request $request)
+    { 
+       
+        $dashboard_image = $request->input('dashboard_image');
+        $dashboard_link = $request->input('dashboard_link');
+
+        if($request->file('dashboard_image'))
+        {
+            $filename = time().'.'.$request->file('dashboard_image')->getClientOriginalExtension();
+            $des_path = storage_path("app/public/uploads/img/dashboardimage");
+            $request->file('dashboard_image')->move($des_path,$filename);  
+        }
+
+        DB::table('dashboard_image')->insert(['di_link'=>$dashboard_link,'di_image'=>$filename]);
+
+        $message = "Dashboard Image Uploaded Successfully";
+        Session::flash('dashboardImage', $message); 
+        return redirect('admin/dashboard-image'); 
+    }
+    public function deleteDashboardImage(Request $request){
+        $id = $request['id'];
+        $delete_imagename = DB::table('dashboard_image')->where('di_id', $id)->first();
+        
+        if(\File::exists(storage_path("app/public/uploads/img/dashboardimage/".$delete_imagename->di_image))){
+            \File::delete(storage_path("app/public/uploads/img/dashboardimage/".$delete_imagename->di_image));
+            DB::table('dashboard_image')->where('di_id', $id)->delete();
+        }else{
+            dd('File does not exists.');
+          }
+        
+        return redirect('admin/dashboard-image');
     }
 }

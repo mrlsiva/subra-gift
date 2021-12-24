@@ -179,6 +179,9 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function()
     Route::post('/order-shipstatus',['as'=>'admin.order.shipstatus','uses'=>'AdminController@orderShipStatus']);
 
     Route::get('/order-details', 'AdminController@getPopupOrderDetails')->name('admin.orderdetails');
+    Route::get('/dashboard-image', 'AdminController@getDashboardImage')->name('admin.dashboard.image');
+    Route::post('/dashboardpost-image', 'AdminController@postDashboardImage')->name('admin.dashboardpost.image');
+    Route::any('/delete-dashboardimage/{id}','AdminController@deleteDashboardImage');
 });
 
 Route::any('membership/plans', 'MembershipController@checkMembership');
