@@ -11,11 +11,10 @@
         </nav>
      </div>
      @if(count($cartItems) == 0)
-
        <div class="form-control">
             <center>No Products In Cart</center>
             <center> <img src="https://www.subragiftstudios.com/storage/app/public/cart/cart-empty.png" style="width:110px;height:110px;"></img></center>
-        </div>
+        </div>  
      @endif
     @if(count($cartItems) > 0)
     <div class="row mb-5 hidefulldiv">
@@ -281,36 +280,29 @@
     </div>
     </div>
 <div class="container"> 
-<div class="form-control">
-            <center>No Products In Cart</center>
-            <center> <img src="https://www.subragiftstudios.com/storage/app/public/cart/cart-empty.png" style="width:110px;height:110px;"></img></center>
-        </div>
-<div class="row offer-section my-2 py-3">
-    <div class="col-12"> <h4>Available Offers</h4> </div>
-
-
-    @if($coupons)
-    @foreach($coupons as $cou)
-        <div class="col-sm-4 col-md-4 col-12 my-2  ">
-            <div class="offer-box p-2">
-                <div class="offer-title mb-2">{{ $cou->coupon_title }}</div>
-                <div class="Offer-desc mb-1">{{ $cou->coupon_desc }}</div>
-                <div class="offer-validate mb-1"> Valid till @if($cou->coupon_valid_date) {{ date('dS M, Y', strtotime($cou->coupon_valid_date)) }} @endif</div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6 col-sm-6 col-md-6 p-0 offer-copy text-center"><a>{{ $cou->coupon }}</a></div>
-                        <div class="col-6 col-sm-6 col-md-6 copy-code" data-title="{{ $cou->coupon }}"> 
-                            <a> <i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy
-                                Coupon</a>
+    <div class="row offer-section my-2 py-3">
+        <div class="col-12"> <h4>Available Offers</h4> </div>
+        @if($coupons)
+        @foreach($coupons as $cou)
+            <div class="col-sm-4 col-md-4 col-12 my-2  ">
+                <div class="offer-box p-2">
+                    <div class="offer-title mb-2">{{ $cou->coupon_title }}</div>
+                    <div class="Offer-desc mb-1">{{ $cou->coupon_desc }}</div>
+                    <div class="offer-validate mb-1"> Valid till @if($cou->coupon_valid_date) {{ date('dS M, Y', strtotime($cou->coupon_valid_date)) }} @endif</div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 col-sm-6 col-md-6 p-0 offer-copy text-center"><a>{{ $cou->coupon }}</a></div>
+                            <div class="col-6 col-sm-6 col-md-6 copy-code" data-title="{{ $cou->coupon }}"> 
+                                <a> <i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy
+                                    Coupon</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
-    @endif
-    
-</div>
+        @endforeach
+        @endif        
+    </div>
 </div>
 
    
