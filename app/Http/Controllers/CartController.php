@@ -10,6 +10,7 @@ use App\BoxProduct;
 use App\Box;
 use App\Categories;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Coupon;
 
 class CartController extends Controller
 {	
@@ -94,73 +95,75 @@ class CartController extends Controller
     public function viewCart(Request $request) {
         // dd(Auth::user());
         if (!empty(Auth::user())){
-        $user_id = Auth::id();
-            $getItems = DB::table('cart-products as c')
-        ->select('c.id','c.sku', 'c.book_title', 'c.amount','c.status', 'c.qty', 'cat.series_table_name', 'attach', 'cart_attach','cart_attach_text')
-        ->join('categories as cat','c.category_id','cat.id')
-        ->where('user_id',Auth::user()->id)    
-        ->where('c.status', '1')
-        ->where('c.amount', '>', 0)
-        ->get();
-            // dd($getItems);
-        // $defaultPath = 
-        $getTable = [];$total=0;
-        foreach ($getItems as $k=>$item) {
-            // dd($item->id);
-            $cat_img = DB::table($item->series_table_name)->select('thumb_img')->where("sku",$item->sku)->first();
-            // dd($item, $cat_img);
-            $getTable[$k]["image"] = url("/")."/storage/app/public/uploads/img/". $item->series_table_name."/".$cat_img->thumb_img;
-            // $getTable[$k]["image"] =url('storage/app/public/uploads/img/'.$item->series_table_name.'/'.$cat_img->thumb_img );
-            $getTable[$k]["product_image"] = url("/")."/public/cart/". $item->cart_attach;
-            $getTable[$k]["product_text"] = $item->cart_attach_text;
-            $getTable[$k]["attach"] = $item->attach;
-            $getTable[$k]["cart_attach"] = $item->cart_attach;
-            $getTable[$k]["sku"] = $item->sku;
-            $getTable[$k]["id"] = $item->id;
-            $getTable[$k]["book_title"] = $item->book_title;
-            $getTable[$k]["amount"] = $item->amount;
-            $getTable[$k]["qty"] = $item->qty;
-            $final_price = intval($item->amount) * intval($item->qty);
-            $getTable[$k]["curr_total"] = $final_price;
-            $total += $final_price;
-        }
-
-       
-        /*$boxes = DB::table('box_products')->select('box_products.*')->where('box_products.user_id', $user_id)->where('box_products.status', "=", 1)->get(); 
-        $i = 1;
-        $lineItems = [];
-        foreach ($boxes as $box) {
-            $lineItems[$i]['box'] = $box;
-            $lineItems[$i]['box_title'] = Box::where('id',$box->box_id)->value('plan');
-            $lineItems[$i]['box_category'] = Categories::where('id', $box->category_id)->value('series_name');
-            $total += $box->box_amount;
-            $cart_ids = json_decode($box->cart_ids);
-            $boxItems = DB::table('cart-products as c')
-                ->select('c.id','c.sku', 'c.book_title', 'c.amount','c.status', 'c.qty', 'cat.series_table_name')
-                ->join('categories as cat','c.category_id','cat.id')
-                ->where('user_id',Auth::user()->id)
-                ->whereIn('c.id', $cart_ids)
-                ->where('c.status', '1')
-                ->get();
-            foreach ($boxItems as $k=>$item) {
+            $user_id = Auth::id();
+                $getItems = DB::table('cart-products as c')
+            ->select('c.id','c.sku', 'c.book_title', 'c.amount','c.status', 'c.qty', 'cat.series_table_name', 'attach', 'cart_attach','cart_attach_text')
+            ->join('categories as cat','c.category_id','cat.id')
+            ->where('user_id',Auth::user()->id)    
+            ->where('c.status', '1')
+            ->where('c.amount', '>', 0)
+            ->get();
+                // dd($getItems);
+            // $defaultPath = 
+            $getTable = [];$total=0;
+            foreach ($getItems as $k=>$item) {
                 // dd($item->id);
                 $cat_img = DB::table($item->series_table_name)->select('thumb_img')->where("sku",$item->sku)->first();
                 // dd($item, $cat_img);
-                $boxTable[$k]["image"] = url("/")."/storage/app/public/uploads/img/".$item->series_table_name."/thumb/".$cat_img->thumb_img;
-                $boxTable[$k]["sku"] = $item->sku;
-                $boxTable[$k]["id"] = $item->id;
-                $boxTable[$k]["book_title"] = $item->book_title;
-                $boxTable[$k]["amount"] = $item->amount;
-                $boxTable[$k]["qty"] = $item->qty;
+                $getTable[$k]["image"] = url("/")."/storage/app/public/uploads/img/". $item->series_table_name."/".$cat_img->thumb_img;
+                // $getTable[$k]["image"] =url('storage/app/public/uploads/img/'.$item->series_table_name.'/'.$cat_img->thumb_img );
+                $getTable[$k]["product_image"] = url("/")."/public/cart/". $item->cart_attach;
+                $getTable[$k]["product_text"] = $item->cart_attach_text;
+                $getTable[$k]["attach"] = $item->attach;
+                $getTable[$k]["cart_attach"] = $item->cart_attach;
+                $getTable[$k]["sku"] = $item->sku;
+                $getTable[$k]["id"] = $item->id;
+                $getTable[$k]["book_title"] = $item->book_title;
+                $getTable[$k]["amount"] = $item->amount;
+                $getTable[$k]["qty"] = $item->qty;
                 $final_price = intval($item->amount) * intval($item->qty);
-                $boxTable[$k]["curr_total"] = $final_price;
+                $getTable[$k]["curr_total"] = $final_price;
                 $total += $final_price;
             }
-            $lineItems[$i]['items'] = $boxTable;
-            $i++;
-        }    */    
+
+           
+            /*$boxes = DB::table('box_products')->select('box_products.*')->where('box_products.user_id', $user_id)->where('box_products.status', "=", 1)->get(); 
+            $i = 1;
+            $lineItems = [];
+            foreach ($boxes as $box) {
+                $lineItems[$i]['box'] = $box;
+                $lineItems[$i]['box_title'] = Box::where('id',$box->box_id)->value('plan');
+                $lineItems[$i]['box_category'] = Categories::where('id', $box->category_id)->value('series_name');
+                $total += $box->box_amount;
+                $cart_ids = json_decode($box->cart_ids);
+                $boxItems = DB::table('cart-products as c')
+                    ->select('c.id','c.sku', 'c.book_title', 'c.amount','c.status', 'c.qty', 'cat.series_table_name')
+                    ->join('categories as cat','c.category_id','cat.id')
+                    ->where('user_id',Auth::user()->id)
+                    ->whereIn('c.id', $cart_ids)
+                    ->where('c.status', '1')
+                    ->get();
+                foreach ($boxItems as $k=>$item) {
+                    // dd($item->id);
+                    $cat_img = DB::table($item->series_table_name)->select('thumb_img')->where("sku",$item->sku)->first();
+                    // dd($item, $cat_img);
+                    $boxTable[$k]["image"] = url("/")."/storage/app/public/uploads/img/".$item->series_table_name."/thumb/".$cat_img->thumb_img;
+                    $boxTable[$k]["sku"] = $item->sku;
+                    $boxTable[$k]["id"] = $item->id;
+                    $boxTable[$k]["book_title"] = $item->book_title;
+                    $boxTable[$k]["amount"] = $item->amount;
+                    $boxTable[$k]["qty"] = $item->qty;
+                    $final_price = intval($item->amount) * intval($item->qty);
+                    $boxTable[$k]["curr_total"] = $final_price;
+                    $total += $final_price;
+                }
+                $lineItems[$i]['items'] = $boxTable;
+                $i++;
+            }    */    
         
-        return view('pages/viewCart')->with('cartItems', $getTable)->with('total', $total);
+            $coupons = Coupon::where('coupon_status', 1)->where('coupon_valid_date', '>=',date('Y-m-d'))->orderBy('id', 'DESC')->get();
+        
+            return view('pages/viewCart', compact('coupons'))->with('cartItems', $getTable)->with('total', $total);
         } else {
             return redirect('login');
         }
@@ -315,14 +318,19 @@ class CartController extends Controller
     public function checkCouponCode(Request $request)
     {
         $plans = DB::table("coupons")->where('coupon',$request->id)->first();
+        $discount = 0;
         if($plans)
         {
-        $msg = 'true';
+            if($plans->coupon_type == 1)
+                $discount = number_format($request->amount * ($plans->coupon_value/100), 2);
+            elseif($plans->coupon_type == 2)
+                $discount = number_format($plans->coupon_value,2);
+            $msg = 'true';
         }
         else
         {
             $msg = 'false';
         }
-        return $msg;
+        return ['status' => $msg, 'discount' => $discount, 'amount'=>($request->amount-$discount) ];
     }   
 }

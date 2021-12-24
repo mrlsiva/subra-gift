@@ -50,3 +50,8 @@ function formatOrderDate($datetime) {
     //return date('M,d Y H:i', strtotime($datetime));
     return date('d-m-Y H:i', strtotime($datetime));
 }
+
+function formatDate($datetime) {
+    //return date('M,d Y H:i', strtotime($datetime));
+    return date('d-m-Y', strtotime($datetime));
+}

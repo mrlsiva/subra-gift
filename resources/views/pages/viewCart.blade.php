@@ -277,7 +277,8 @@
 
 <div class="row offer-section my-2 py-3">
     <div class="col-12"> <h4>Available Offers</h4> </div>
-    <div class="col-sm-4 col-md-4 col-12 my-2  ">
+
+    {{--<div class="col-sm-4 col-md-4 col-12 my-2  ">
         <div class="offer-box p-2">
             <div class="offer-title mb-2">Flat 100 Offer</div>
             <div class="Offer-desc mb-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -305,37 +306,28 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-12 my-2  ">
-        <div class="offer-box p-2">
-            <div class="offer-title mb-2">Flat 100 Offer</div>
-            <div class="Offer-desc mb-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                has been the industry's standard dummy text ever since the 1500s, </div>
-            <div class="offer-validate mb-1"> Valid till 30th Feb</div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6 p-0 offer-copy text-center"><a>FLAT100</a></div>
-                    <div class="col-6 col-sm-6 col-md-6 copy-code"> <a> <i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy
-                            Coupon</a></div>
+    </div>--}}
+
+    @if($coupons)
+    @foreach($coupons as $cou)
+        <div class="col-sm-4 col-md-4 col-12 my-2  ">
+            <div class="offer-box p-2">
+                <div class="offer-title mb-2">{{ $cou->coupon_title }}</div>
+                <div class="Offer-desc mb-1">{{ $cou->coupon_desc }}</div>
+                <div class="offer-validate mb-1"> Valid till @if($cou->coupon_valid_date) {{ date('dS M, Y', strtotime($cou->coupon_valid_date)) }} @endif</div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6 p-0 offer-copy text-center"><a>{{ $cou->coupon }}</a></div>
+                        <div class="col-6 col-sm-6 col-md-6 copy-code" data-title="{{ $cou->coupon }}"> 
+                            <a> <i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy
+                                Coupon</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-12 my-2  ">
-        <div class="offer-box p-2">
-            <div class="offer-title mb-2">Flat 100 Offer</div>
-            <div class="Offer-desc mb-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                has been the industry's standard dummy text ever since the 1500s, </div>
-            <div class="offer-validate mb-1"> Valid till 30th Feb</div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6 p-0 offer-copy text-center"><a>FLAT100</a></div>
-                    <div class="col-6 col-sm-6 col-md-6 copy-code"> <a> <i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy
-                            Coupon</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
+    @endif
     
 </div>
 </div>
@@ -346,51 +338,51 @@
 $(document).ready(function(){
     $(".showmsgdiv").hide();
     var ftotal = 0;
-        $('input[name="qty_total_amt[]"]').each(function(){
-            var myval = parseInt($(this).val());
-            ftotal = ftotal + myval
-        });
-        $("#purchase_total").html(ftotal.toFixed(2));
-        var discount =parseInt($("#delivery_charge").text());
-        $("#final_amt").text(parseInt(ftotal)+discount);
-        $(document).on('click', '.show_modal', function(){
-            //alert('hi');
-                $("#exampleModalCenter").modal('show');
-                $("#pro_img").removeAttr('src');
-                $("#pro_txt").text('');
-                $("#product_name").text('');
-                $("#product_qty").text('');
-                $("#product_price").text('');
-                $("#product_totalprice").text('');
-                $("#pro_img").show();
-                $("#show_text_product").show();
-                var myimage = $(this).attr('product_image');
-                var mytxt = $(this).attr('product_text');
-                var product_name = $(this).attr('product_name');
-                var product_qty = $(this).attr('product_qty');
-                var product_price = $(this).attr('product_price');
-                var product_totalprice = $(this).attr('product_totalprice');
-                if(myimage.indexOf('.') > -1)
-                {
-                    $("#pro_img").attr('src',myimage);
-                }
-                else
-                {
-                    $("#pro_img").hide();
-                }
-                if(mytxt == '')
-                {
-                    //alert(mytxt);
-                    $("#show_text_product").hide();
-                }
-                //alert(mytxt);
-                
-                $("#pro_txt").text(mytxt);
-                $("#product_name").text(product_name);
-                $("#product_qty").text(product_qty);
-                $("#product_price").text(product_price);
-                $("#product_totalprice").text(product_totalprice);
-        });
+    $('input[name="qty_total_amt[]"]').each(function(){
+        var myval = parseInt($(this).val());
+        ftotal = ftotal + myval
+    });
+    $("#purchase_total").html(ftotal.toFixed(2));
+    var discount =parseInt($("#delivery_charge").text());
+    $("#final_amt").text(parseInt(ftotal)+discount);
+    $(document).on('click', '.show_modal', function(){
+        //alert('hi');
+        $("#exampleModalCenter").modal('show');
+        $("#pro_img").removeAttr('src');
+        $("#pro_txt").text('');
+        $("#product_name").text('');
+        $("#product_qty").text('');
+        $("#product_price").text('');
+        $("#product_totalprice").text('');
+        $("#pro_img").show();
+        $("#show_text_product").show();
+        var myimage = $(this).attr('product_image');
+        var mytxt = $(this).attr('product_text');
+        var product_name = $(this).attr('product_name');
+        var product_qty = $(this).attr('product_qty');
+        var product_price = $(this).attr('product_price');
+        var product_totalprice = $(this).attr('product_totalprice');
+        if(myimage.indexOf('.') > -1)
+        {
+            $("#pro_img").attr('src',myimage);
+        }
+        else
+        {
+            $("#pro_img").hide();
+        }
+        if(mytxt == '')
+        {
+            //alert(mytxt);
+            $("#show_text_product").hide();
+        }
+        //alert(mytxt);
+        
+        $("#pro_txt").text(mytxt);
+        $("#product_name").text(product_name);
+        $("#product_qty").text(product_qty);
+        $("#product_price").text(product_price);
+        $("#product_totalprice").text(product_totalprice);
+    });
     $(document).on('click','.btnPlus', function(){
         var myattr = $(this).attr('attr');
         var single_price = $(this).attr('single_price');
@@ -634,59 +626,115 @@ $(document).ready(function(){
                 }
             }); 
     });
+
     $(document).on('click','#apply_coupon',function(){
-        $('#jsCouponFailure').hide();
-        $('#jsCouponSuccess').hide();
-        var mycounpon = $("#mycoupon").val();
-        //alert(mycounpon);
-        var base_url = "{{url('/')}}";
-            var headers = $('meta[name="csrf-token"]').attr('content');
-            // console.log("getCategories: ", getCategories);
-            var requestData = {
-                "id": mycounpon
-            };
-            $.ajax({
-                type: "POST",
-                headers: {'X-CSRF-TOKEN': headers},
-                data: requestData,
-                url: base_url+"/coupon-code-check",
-                success: function(msg){
-                    console.log('msg: ', msg);
-                    if(msg == 'true')
-                    {
-                        // alert('coupon applied successfully');
-                       var finalamt =  $("#final_amt").text();
-                       //alert(finalamt); coupon_discountcharge
+        if($.trim($('#apply_coupon').text()) == 'Apply') {
+            $('#jsCouponFailure').hide();
+            $('#jsCouponSuccess').hide();
+            var mycounpon = $("#mycoupon").val();
+            if(mycounpon != '') {
+                var finalamt =  parseFloat($("#delivery_charge").text()) + parseFloat($('#purchase_total').text());
+                //alert(mycounpon);
+                var base_url = "{{url('/')}}";
+                var headers = $('meta[name="csrf-token"]').attr('content');
+                // console.log("getCategories: ", getCategories);
+                var requestData = {
+                    "id": mycounpon,
+                    "amount":finalamt
+                };
+                $.ajax({
+                    type: "POST",
+                    headers: {'X-CSRF-TOKEN': headers},
+                    data: requestData,
+                    url: base_url+"/coupon-code-check",
+                    success: function(msg){
+                        // console.log('msg: ', msg);
+                        if(msg.status == 'true')
+                        {
+                            // console.log(msg.discount);
+                            // alert('coupon applied successfully');
+                           var finalamt =  $("#final_amt").text();
+                           //alert(finalamt); coupon_discountcharge
+
+                            // var disAmount = parseFloat(( finalamt * 20 / 100 ).toFixed(2));
+                            var discount = msg.discount;
                        
-                       var discount = (finalamt - ( finalamt * 20 / 100 )).toFixed(2);
-                       var coupondiscount = $("#coupon_discountcharge").text(( finalamt * 20 / 100 ).toFixed(2));
-                       $('#coupon_amount').val(( finalamt * 20 / 100 ).toFixed(2));
-                       //alert(discount);
-                       $("#final_amt").text(discount);
-                       $("#amount").val(discount);
-                       $('#jsCouponSuccess').show();
-                       $('#apply_coupon').prop('disabled', true);
+                           
+                           // var discount = (finalamt - disAmount).toFixed(2);
+                           var amount = msg.amount;
+                           var coupondiscount = $("#coupon_discountcharge").text((discount));
+
+                           $('#coupon_amount').val(discount);
+                           //alert(discount);
+
+                           $("#final_amt").text(amount.toFixed(2));
+                           $("#amount").val(amount);
+
+                           $('#jsCouponSuccess').show();
+
+                            $('#mycoupon').prop('readonly', true);
+                            $('#apply_coupon').text('Remove');
+                        }
+                        else if(msg.status == 'false')
+                        {
+                            // alert('coupon code not valid');
+                            $('#jsCouponFailure').show();
+                            $('#mycoupon').prop('readonly', true);
+                            $('#apply_coupon').text('Remove');
+                        }
+                   /*      $('#redo-box').fadeOut().hide();
+                        var getItemTotal = $('#item-total-'+msg).text();
+                        var itemCount = $('#totalQty').text();
+                        var updateTotal = parseInt($('#amount').val()) + parseInt(getItemTotal);
+                        console.log('updateTotal: ', updateTotal, $('#amount').val());
+                        $('#item-'+msg).fadeIn().show();
+                        $('#amount').val(updateTotal);
+                        $('.amount').text(updateTotal);
+                        $('#totalQty').text(parseInt(itemCount)+1);
+                        $('#totalAmount').text(updateTotal); */
+                        // setTimeout('location.reload()', 1000);
                     }
-                    else if(msg == 'false')
-                    {
-                        // alert('coupon code not valid');
-                        $('#jsCouponFailure').show();
-                    }
-               /*      $('#redo-box').fadeOut().hide();
-                    var getItemTotal = $('#item-total-'+msg).text();
-                    var itemCount = $('#totalQty').text();
-                    var updateTotal = parseInt($('#amount').val()) + parseInt(getItemTotal);
-                    console.log('updateTotal: ', updateTotal, $('#amount').val());
-                    $('#item-'+msg).fadeIn().show();
-                    $('#amount').val(updateTotal);
-                    $('.amount').text(updateTotal);
-                    $('#totalQty').text(parseInt(itemCount)+1);
-                    $('#totalAmount').text(updateTotal); */
-                    // setTimeout('location.reload()', 1000);
-                }
-            });
+                });
+            } else {
+                $('#jsCouponFailure').show();
+            }
+        } else if($.trim($('#apply_coupon').text()) == 'Remove') {
+            $('#coupon_amount').val(0);
+            $('#coupon_discountcharge').text(0);
+            $('#mycoupon').val('');
+            $('#mycoupon').prop('readonly', false);
+
+            var amount =  parseFloat($("#delivery_charge").text()) + parseFloat($('#purchase_total').text());
+
+            $("#amount").val(amount);
+            $("#final_amt").text(amount.toFixed(2));
+            $('#jsCouponSuccess').hide();
+             $('#jsCouponFailure').hide();
+             $('#apply_coupon').text('Apply');
+            
+        }
 
     });
+
+    $(document).on('click','.copy-code', function() {
+        // console.log($(this).attr('data-title'));
+        var copied = $(this).attr('data-title');
+        navigator.clipboard.writeText(copied);
+
+        $('.copy-code').find('a').html('<i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy Coupon');
+         $('.copy-code').removeClass('copied');
+
+        $(this).addClass('copied');
+        $(this).find('a').text('Code Copied!');
+
+
+        
+        // <a> <i class="fa fa-clone mr-2" aria-hidden="true"></i>Copy Coupon</a>
+
+        /* Alert the copied text */
+        // alert("Copied the text: " + copied);
+    });
+        
     /*$(document).on('click','#checkout_submit',function(){
         alert('kk');
         

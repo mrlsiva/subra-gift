@@ -459,15 +459,43 @@ class AdminController extends Controller
 
         $coupon = new Coupon;
         $coupon->coupon = $request->coupon;
+        $coupon->coupon_title = $request->title;
+        $coupon->coupon_desc = $request->description;
+        $coupon->coupon_type = $request->coupon_type;
+        $coupon->coupon_value = $request->coupon_value;
+        $coupon->coupon_valid_date = date('Y-m-d', strtotime($request->coupon_valid_date));
         $coupon->save();
         return redirect('admin/coupon')->with('success', 'The coupon has been added successfully!');
     }
 
     public function couponDelete($id = null) {
         $coupon = Coupon::find($id);
+        $coupon->coupon_status = 0;
         $coupon->delete();
         return redirect('admin/coupon')->with('success', 'The coupon has been deleted successfully!');
     }
+
+    public function getCouponEdit($id = null) {
+        $coupon = Coupon::find($id);
+        return view('adminAddCoupon', compact('coupon'));
+    }
+
+    public function postCouponUpdate($id = null, Request $request) {
+        $request->validate([
+            'coupon' => 'required|max:255|unique:coupons,coupon,'.$id,
+        ]);
+
+        $coupon = Coupon::find($id);
+        $coupon->coupon = $request->coupon;
+        $coupon->coupon_title = $request->title;
+        $coupon->coupon_desc = $request->description;
+        $coupon->coupon_type = $request->coupon_type;
+        $coupon->coupon_value = $request->coupon_value;
+        $coupon->coupon_valid_date = date('Y-m-d', strtotime($request->coupon_valid_date));
+        $coupon->save();
+        return redirect('admin/coupon')->with('success', 'The coupon has been updated successfully!');
+    }
+
 	public function listBookList()
     {
         $books = DB::table('user_books')
