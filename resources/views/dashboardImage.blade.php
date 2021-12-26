@@ -17,11 +17,13 @@
                         <table>
                             <th>Image</th>
                             <th>Link</th>
+                            <th>Alt Name</th>
                             <th>Action</th>
                         @foreach($getdashobardImage as $value)
                             <tr>
                                 <td> <img src="{{url('/storage/app/public/uploads/img/dashboardimage'.'/'.$value->di_image)}}" width="100" height="100"/> </td>
                                 <td>{{$value->di_link}}</td> 
+                                <td>{{$value->di_name}}</td> 
                                 <td><a href="{{url('/admin/delete-dashboardimage/'.$value->di_id)}}" id="delete-{{$value->di_id}}">Delete</a></td>
                             </tr>
                         @endforeach 
@@ -45,6 +47,10 @@
                                 <div class="form-group">
                                     <label for="cat_name">Image Link</label>
                                     <input type="text" name="dashboard_link" id="dashboard_link" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cat_name">Alt name</label>
+                                    <input type="text" name="dashboard_name" id="dashboard_name" required/>
                                 </div>
                                 <div class="form-group">
                                     <label for="cat_banner">Image</label>

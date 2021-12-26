@@ -728,6 +728,7 @@ class AdminController extends Controller
        
         $dashboard_image = $request->input('dashboard_image');
         $dashboard_link = $request->input('dashboard_link');
+        $dashboard_name = $request->input('dashboard_name');
         $dash_img_folder = storage_path("app/public/uploads/img/dashboardimage");
         if(!file_exists($dash_img_folder)){
             mkdir($dash_img_folder);
@@ -739,7 +740,7 @@ class AdminController extends Controller
             $request->file('dashboard_image')->move($des_path,$filename);  
         }
 
-        DB::table('dashboard_image')->insert(['di_link'=>$dashboard_link,'di_image'=>$filename]);
+        DB::table('dashboard_image')->insert(['di_link'=>$dashboard_link,'di_name'=>$dashboard_name,'di_image'=>$filename]);
 
         $message = "Dashboard Image Uploaded Successfully";
         Session::flash('dashboardImage', $message); 
