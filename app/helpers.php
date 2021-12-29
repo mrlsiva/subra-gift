@@ -44,6 +44,24 @@ function sendCommonMail($type, $data) {
 		}
 		$return->send(new CommentMail($data));
 	}
+	if($type == 'order_cancel')
+	{
+		$return = Mail::to($data['to_email']);
+		if(isset($data['cc_email']))
+		{
+		$return->cc($data['cc_email']);
+		}
+		$return->send(new CommentMail($data));
+	}
+	if($type == 'order_delivery')
+	{
+		$return = Mail::to($data['to_email']);
+		if(isset($data['cc_email']))
+		{
+		$return->cc($data['cc_email']);
+		}
+		$return->send(new CommentMail($data));
+	}
 }
 
 function formatOrderDate($datetime) {

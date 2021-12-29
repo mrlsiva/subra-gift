@@ -43,6 +43,14 @@ class CommentMail extends Mailable
         {
             return $this->subject($this->data['subject'])->markdown('emails.blog.cronplanuser')->with(['data'=>$this->data]);
         }
+        else if(isset($this->data['order_cancel_body']))
+        {
+            return $this->subject($this->data['subject'])->markdown('emails.commanmail')->with(['data'=>$this->data]);
+        }
+        else if(isset($this->data['order_delivery_body']))
+        {
+            return $this->subject($this->data['subject'])->markdown('emails.commanmail')->with(['data'=>$this->data]);
+        }
         else
         {
         return $this->subject($this->data['subject'])->markdown('emails.blog.comment_blog')->with(['data'=>$this->data]);

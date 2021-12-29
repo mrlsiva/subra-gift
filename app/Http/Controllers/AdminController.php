@@ -642,37 +642,54 @@ class AdminController extends Controller
     public function orderShipStatus(Request $request) {
         $ord = Order::find($request->order_id);
         $ord->ship_status = $request->status;
+        $ord->save();
         $to_name = $ord->first_name;
         $to_email = $ord->email;
-        if($ord->save())
-        //$to_name = 'Ligori';  order_shipstatus
-        // $to_email = 'sugunadevi14@gmail.com';
-        if($request->status == 5)
+        
+        if($request->status == 4)
         {
-            //$to_email = 'venkatecool6@gmail.com';
-         $data = array('name'=>$to_name, 'body' => 'Your Transaction Id is ' .$ord->txn_id. ' 
-                        and your Transaction Detail is ' .$ord->txn_details.
-                        'and your total amount is ' .$ord->amount);
-            
-            try {
-                \Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
-                    $message->to($to_email, $to_name)
-                    ->subject('Order canceled your money credited within 2 bank working days');
-                    // $message->from('sugunadvp@gmail.com','Test Mail');
-                    //$message->from('venkateshftn@gmail.com','Cancellation Order');
-                });
-            }
-            catch(Exception $ex) {
-                //$this->populate_array[] = array($row[2] => $ex->getLine());
+            //////
+            $data = [];
+				$data['to_email']   = $to_email;
+				$data['to_name']    = $to_name;
+				$data['subject']  = "Order will Deliver Soon";
+				$data['order_delivery_body']    =  'Your Transaction Id is ' .$ord->txn_id. ' and your Transaction Detail is ' .$ord->txn_details. 'and your total amount is ' .$ord->amount ;
+			try {
+				sendCommonMail('order_delivery', $data);
+			}
+			catch(Exception $ex) {
                 echo $ex->getLine();
                 return "We've got errors!";
             }
             catch(\Swift_TransportException $e) {
-                echo $response = $e->getMessage();
+                $response = $e->getMessage();
                 return "222";
             }
             catch(\Illuminate\Database\QueryException $ex) {
-                //$this->populate_array[] = array($row[2] => $ex->getLine());
+                echo $ex->getLine();
+                return "333";
+            }
+        }
+        if($request->status == 5)
+        {
+            //////
+            $data = [];
+				$data['to_email']   = $to_email;
+				$data['to_name']    = $to_name;
+				$data['subject']  = "Order canceled your money credited within 2 bank working days";
+				$data['order_cancel_body']    =  'Your Transaction Id is ' .$ord->txn_id. ' and your Transaction Detail is ' .$ord->txn_details. 'and your total amount is ' .$ord->amount ;
+			try {
+				sendCommonMail('order_cancel', $data);
+			}
+			catch(Exception $ex) {
+                echo $ex->getLine();
+                return "We've got errors!";
+            }
+            catch(\Swift_TransportException $e) {
+                $response = $e->getMessage();
+                return "222";
+            }
+            catch(\Illuminate\Database\QueryException $ex) {
                 echo $ex->getLine();
                 return "333";
             }
