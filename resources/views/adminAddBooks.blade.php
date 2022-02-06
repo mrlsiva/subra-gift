@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Add products</div>
+                <div class="card-header">Add product</div>
 
                 <div class="card-body">
                     @if(Session::has('message'))
