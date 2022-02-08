@@ -152,7 +152,7 @@
                  <span class="onsale">Sale!</span>
                  <div class="product-transition">
                  <div class="product-image">
-                 <img src="	https://www.subragiftstudios.com/storage/app/public/uploads/img/{{ $value->series_table_name }}/{{ $value->series_table_name }}.png" class="backup_picture"></div>
+                 <img src="storage/app/public/uploads/img/{{ $value->series_table_name }}/{{ $value->series_table_name }}.png" class="backup_picture"></div>
                  <a href="series/{{ $value->series_table_name }}" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"></a></div>
                  <div class="product-caption">
                  <h3 class="woocommerce-loop-product__title">
@@ -212,7 +212,7 @@
         $(document).ready(function()
         {
             $(".backup_picture").on("error", function(){
-                $(this).attr('src', 'https://www.subragiftstudios.com/storage/app/public/uploads/img/mug/mug.png');
+                $(this).attr('src', 'storage/app/public/uploads/img/mug/mug.png');
             });
         });
         </script>
