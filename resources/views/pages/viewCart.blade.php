@@ -13,7 +13,7 @@
      @if(count($cartItems) == 0)
        <div class="form-control">
             <center>No Products In Cart</center>
-            <center> <img src="storage/app/public/cart/cart-empty.png" style="width:110px;height:110px;"></img></center>
+            <center> <img src="../storage/app/public/cart/cart-empty.png" style="width:110px;height:110px;"></img></center>
         </div>  
      @endif
     @if(count($cartItems) > 0)
