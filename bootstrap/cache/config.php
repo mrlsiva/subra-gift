@@ -442,7 +442,11 @@
     ),
     'temporary_files' => 
     array (
+<<<<<<< HEAD
       'local_path' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\framework/laravel-excel',
+=======
+      'local_path' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\framework/laravel-excel',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -457,12 +461,20 @@
       'local' => 
       array (
         'driver' => 'local',
+<<<<<<< HEAD
         'root' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\app',
+=======
+        'root' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\app',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
       ),
       'public' => 
       array (
         'driver' => 'local',
+<<<<<<< HEAD
         'root' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\app/public',
+=======
+        'root' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\app/public',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
         'url' => '/storage',
         'visibility' => 'public',
       ),
@@ -508,13 +520,21 @@
       'single' => 
       array (
         'driver' => 'single',
+<<<<<<< HEAD
         'path' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\logs/laravel.log',
+=======
+        'path' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\logs/laravel.log',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
+<<<<<<< HEAD
         'path' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\logs/laravel.log',
+=======
+        'path' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\logs/laravel.log',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
         'level' => 'debug',
         'days' => 14,
       ),
@@ -578,7 +598,11 @@
       'theme' => 'default',
       'paths' => 
       array (
+<<<<<<< HEAD
         0 => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\resources\\views/vendor/mail',
+=======
+        0 => 'C:\\xampp\\htdocs\\subra-gift\\resources\\views/vendor/mail',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
       ),
     ),
     'log_channel' => NULL,
@@ -665,7 +689,11 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
+<<<<<<< HEAD
     'files' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\framework/sessions',
+=======
+    'files' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\framework/sessions',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -700,8 +728,14 @@
   array (
     'paths' => 
     array (
+<<<<<<< HEAD
       0 => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\resources\\views',
     ),
     'compiled' => 'D:\\xampp\\htdocs\\laravel\\subra-gift\\storage\\framework\\views',
+=======
+      0 => 'C:\\xampp\\htdocs\\subra-gift\\resources\\views',
+    ),
+    'compiled' => 'C:\\xampp\\htdocs\\subra-gift\\storage\\framework\\views',
+>>>>>>> c4f917367e1d9257f619385e072a3d68bc5d81d0
   ),
 );
