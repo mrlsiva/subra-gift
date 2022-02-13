@@ -84,7 +84,7 @@ img {
 /* Layout */
 
 .wrapper {
-    background-color: #f8fafc;
+    background-color: #da3340;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -105,12 +105,12 @@ img {
 /* Header */
 
 .header {
-    padding: 25px 0;
+    padding: 10px 0;
     text-align: center;
 }
 
 .header a {
-    color: #bbbfc3;
+    color: #ffffff;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -166,7 +166,7 @@ img {
 }
 
 .footer p {
-    color: #aeaeae;
+    color: #ffffff;
     font-size: 12px;
     text-align: center;
 }
@@ -222,11 +222,11 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #3490dc;
-    border-top: 10px solid #3490dc;
-    border-right: 18px solid #3490dc;
-    border-bottom: 10px solid #3490dc;
-    border-left: 18px solid #3490dc;
+    background-color: #da3340;
+    border-top: 10px solid #da3340;
+    border-right: 18px solid #da3340;
+    border-bottom: 10px solid #da3340;
+    border-left: 18px solid #da3340;
 }
 
 .button-green,

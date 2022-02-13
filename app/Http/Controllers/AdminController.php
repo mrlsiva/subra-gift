@@ -643,7 +643,7 @@ class AdminController extends Controller
         $ord = Order::find($request->order_id);
         $ord->ship_status = $request->status;
         $ord->save();
-        $to_name = $ord->first_name;
+        $to_name = $ord->firstname;
         $to_email = $ord->email;
         
         if($request->status == 4)
@@ -653,7 +653,7 @@ class AdminController extends Controller
 				$data['to_email']   = $to_email;
 				$data['to_name']    = $to_name;
 				$data['subject']  = "Order will Deliver Soon";
-				$data['order_delivery_body']    =  'Your Transaction Id is ' .$ord->txn_id. ' and your Transaction Detail is ' .$ord->txn_details. 'and your total amount is ' .$ord->amount ;
+				$data['order_delivery_body']    =  'Your Transaction Id is ' .$ord->txn_id. ' and your Transaction Detail is ' .$ord->txn_details. ' and your total amount is ' .$ord->amount;
 			try {
 				sendCommonMail('order_delivery', $data);
 			}
@@ -677,7 +677,7 @@ class AdminController extends Controller
 				$data['to_email']   = $to_email;
 				$data['to_name']    = $to_name;
 				$data['subject']  = "Order canceled your money credited within 2 bank working days";
-				$data['order_cancel_body']    =  'Your Transaction Id is ' .$ord->txn_id. ' and your Transaction Detail is ' .$ord->txn_details. 'and your total amount is ' .$ord->amount ;
+				$data['order_cancel_body']    =  'Your Transaction Id is ' .$ord->txn_id. ' and your Transaction Detail is ' .$ord->txn_details. ' and your total amount is ' .$ord->amount;
 			try {
 				sendCommonMail('order_cancel', $data);
 			}

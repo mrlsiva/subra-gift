@@ -264,7 +264,9 @@ class CheckoutController extends Controller
     public function myorders() {
     	if(Auth::check()) {
 	    	$orders = Order::where('user_id', Auth::id())->OrderBy('orders.id', 'DESC')->get();
-	    	return view('pages/myorders',compact('orders'));
+	    
+			return view('pages/myorders',compact('orders'));			
+
 	    } else {
 	    	session()->put('previous-route', url('myorders'));
 	    	return redirect("login");
