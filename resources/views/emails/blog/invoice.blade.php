@@ -16,7 +16,7 @@
 
 </head>
 
-<body style="background-color:#e2e1e0;font-family: Open Sans, sans-serif;font-size:100%;font-weight:400;line-height:1.4;color:#000;">
+<body style="background-color:#f5f5f5;font-family: Open Sans, sans-serif;font-size:100%;font-weight:400;line-height:1.4;color:#000;">
 
     <table cellpadding="0" cellspacing="0" style="max-width:670px; margin:0 auto; border:0; padding:0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);-moz-box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);">
 
@@ -152,13 +152,20 @@
 
 						<tr>
 
-							<td style="font-size:14px;padding:50px 15px 0 15px;">
+							<td style="font-size:14px; padding:10px 0;">
 
-								<strong style="display:block;margin:0 0 10px 0;">Regards</strong> No 10 Venkataraman street<br> Srinivasa avenue Chennai 600028<br><br>
+								<strong style="display:block; margin:0 0 5px 0;">Regards</strong> {{ config('app.name') }}
 
-								<b>Phone:</b> +91 9011524939<br>
+							</td>
 
-								<b>Email:</b> books.littleprodigy@gmail.com
+						</tr>
+						<tr>
+
+							<td style="font-size:14px; padding:10px 0 0;">								
+
+								<b>Phone:</b> +91 9176869616<br>
+
+								<b>Email:</b> subragiftstudio@gmail.com
 
 							</td>
 
